@@ -1,0 +1,25 @@
+<workflowactionscript scriptid="customscript_me_wf_send_to_op">
+  <description></description>
+  <isinactive>F</isinactive>
+  <name>ME - Custom Action Create Draft OP</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>F</notifyowner>
+  <notifyuser>F</notifyuser>
+  <returnrecordtype></returnrecordtype>
+  <returntype></returntype>
+  <scriptfile>[/SuiteScripts/Metrodata/me_wf_send_to_op.js]</scriptfile>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_me_wf_send_to_op">
+      <allemployees>F</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>F</allroles>
+      <audslctrole></audslctrole>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <recordtype>INVOICE</recordtype>
+      <runasrole></runasrole>
+      <status>RELEASED</status>
+    </scriptdeployment>
+  </scriptdeployments>
+</workflowactionscript>
