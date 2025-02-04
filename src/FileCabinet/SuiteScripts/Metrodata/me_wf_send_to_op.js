@@ -2,7 +2,7 @@
  *@NApiVersion 2.x
  *@NScriptType WorkflowActionScript
  */
-define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './config/config_op'], function (record, moment, utilOP, config) {
+define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './config/config_op', "N/search"], function (record, moment, utilOP, config, search) {
 
     function getInvoiceData(idInvoice) {
 
@@ -26,6 +26,13 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                 fieldId: 'item',
                 line: i
             })
+
+            let lookupItem = search.lookupFields({ // add LookupItem for Latest OnlinePajak API on 2/4/2025
+                type: search.Type.ITEM,
+                id: idItem,
+                columns: ['custitem5', 'custitem4', 'custitem6']
+            });
+
             var itemGroup = invRecord.getSublistValue({
                 sublistId: 'item',
                 fieldId: 'custcol_me_cfield_item_group',
@@ -67,6 +74,11 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                 fieldId: 'tax1amt',
                 line: i
             })
+            var dpp_checkbox = invRecord.getSublistValue({
+                sublistId: 'item',
+                fieldId: 'custcol12',
+                line: i
+            })
 
             if (description.toUpperCase().indexOf('DISCOUNT') < 0 && itemName.toUpperCase().indexOf('INCOME TAX') < 0) {
                 if (!fullDiscount) {
@@ -75,11 +87,16 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                         "name": description,
                         "quantity": itemQuantity,
                         "unitPrice": itemUnitPrice,
+                        "unit": lookupItem.custitem5,//add lookupItem.custitem5 for Latest OnlinePajak API on 2/4/2025
+                        "type": lookupItem.custitem4,//add lookupItem.custitem4 for Latest OnlinePajak API on 2/4/2025
+                        "code": lookupItem.custitem6,//add lookupItem.custitem6 for Latest OnlinePajak API on 2/4/2025
                         "taxSummary": {
                             'ppn': {
                                 'dpp': dppItem,
                                 'ppn': ppnItem,
                                 'totalPrice': dppItem,
+                                'dppLainFlag': dpp_checkbox == true || dpp_checkbox == 'true' || dpp_checkbox == 'T'? true:false,// add DppLainFlag for Latest OnlinePajak API on 2/4/2025
+                                'dppLain': Number((itemQuantity * itemUnitPrice) * (11/12)).toFixed(2), //add DppLain for Latest OnlinePajak API on 2/4/2025
                             }
                         }
                     })
@@ -90,11 +107,16 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                         "quantity": itemQuantity,
                         "unitPrice": Math.abs(itemUnitPrice),
                         "discount": Math.abs(dppItem),
+                        "unit": lookupItem.custitem5,//add lookupItem.custitem5 for Latest OnlinePajak API on 2/4/2025
+                        "type": lookupItem.custitem4,//add lookupItem.custitem4 for Latest OnlinePajak API on 2/4/2025
+                        "code": lookupItem.custitem6,//add lookupItem.custitem6 for Latest OnlinePajak API on 2/4/2025
                         "taxSummary": {
                             'ppn': {
                                 'dpp': 0,
                                 'ppn': 0,
                                 'totalPrice': dppItem,
+                                'dppLainFlag': dpp_checkbox == true || dpp_checkbox == 'true' || dpp_checkbox == 'T'? true:false,// add DppLainFlag for Latest OnlinePajak API on 2/4/2025
+                                'dppLain': (itemQuantity * itemUnitPrice) * (11/12),//add DppLain for Latest OnlinePajak API on 2/4/2025
                             }
                         }
                     })
