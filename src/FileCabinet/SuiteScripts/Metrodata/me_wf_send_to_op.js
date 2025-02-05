@@ -27,7 +27,7 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                 line: i
             })
 
-            let lookupItem = search.lookupFields({ // add LookupItem for Latest OnlinePajak API on 2/4/2025
+            var lookupItem = search.lookupFields({ // add LookupItem for Latest OnlinePajak API on 2/4/2025
                 type: search.Type.ITEM,
                 id: idItem,
                 columns: ['custitem5', 'custitem4', 'custitem6']
@@ -96,7 +96,7 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                                 'ppn': ppnItem,
                                 'totalPrice': dppItem,
                                 'dppLainFlag': dpp_checkbox == true || dpp_checkbox == 'true' || dpp_checkbox == 'T'? true:false,// add DppLainFlag for Latest OnlinePajak API on 2/4/2025
-                                'dppLain': Number((itemQuantity * itemUnitPrice) * (11/12)).toFixed(2), //add DppLain for Latest OnlinePajak API on 2/4/2025
+                                'dppLain': Number((Number(itemQuantity) * Number(itemUnitPrice)) * (11/12)).toFixed(2), //add DppLain for Latest OnlinePajak API on 2/4/2025
                             }
                         }
                     })
@@ -116,7 +116,7 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                                 'ppn': 0,
                                 'totalPrice': dppItem,
                                 'dppLainFlag': dpp_checkbox == true || dpp_checkbox == 'true' || dpp_checkbox == 'T'? true:false,// add DppLainFlag for Latest OnlinePajak API on 2/4/2025
-                                'dppLain': (itemQuantity * itemUnitPrice) * (11/12),//add DppLain for Latest OnlinePajak API on 2/4/2025
+                                'dppLain':  Number((Number(itemQuantity) * Number(itemUnitPrice)) * (11/12)).toFixed(2),//add DppLain for Latest OnlinePajak API on 2/4/2025
                             }
                         }
                     })
