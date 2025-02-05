@@ -1,5 +1,5 @@
 /**
- *@NApiVersion 2.x
+ *@NApiVersion 2.1
  *@NScriptType WorkflowActionScript
  */
 define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './config/config_op', "N/search"], function (record, moment, utilOP, config, search) {
