@@ -30,7 +30,7 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
             var lookupItem = search.lookupFields({ // add LookupItem for Latest OnlinePajak API on 2/4/2025
                 type: search.Type.ITEM,
                 id: idItem,
-                columns: ['custitem5', 'custitem4', 'custitem6']
+                columns: ['custitem3', 'custitem4', 'custitem5']
             });
 
             var itemGroup = invRecord.getSublistValue({
@@ -88,9 +88,9 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
                         "name": description,
                         "quantity": itemQuantity,
                         "unitPrice": itemUnitPrice,
-                        "unit": lookupItem.custitem5,//add lookupItem.custitem5 for Latest OnlinePajak API on 2/4/2025
-                        "type": lookupItem.custitem4,//add lookupItem.custitem4 for Latest OnlinePajak API on 2/4/2025
-                        "code": lookupItem.custitem6,//add lookupItem.custitem6 for Latest OnlinePajak API on 2/4/2025
+                        "unit": lookupItem.custitem4,//add lookupItem.custitem5 for Latest OnlinePajak API on 2/4/2025
+                        "type": lookupItem.custitem3,//add lookupItem.custitem4 for Latest OnlinePajak API on 2/4/2025
+                        "code": lookupItem.custitem5,//add lookupItem.custitem6 for Latest OnlinePajak API on 2/4/2025
                         "taxSummary": {
                             'ppn': {
                                 'dpp': dppItem,
