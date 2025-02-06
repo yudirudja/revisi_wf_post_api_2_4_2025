@@ -76,7 +76,8 @@ define(['N/record', './lib/moment.min', './lib/me_online_pajak_utility', './conf
             })
             var dpp_checkbox = invRecord.getSublistValue({
                 sublistId: 'item',
-                fieldId: 'custcol12',
+                // fieldId: 'custcol12', on SB
+                fieldId: 'custcol7', //on Production
                 line: i
             })
 
